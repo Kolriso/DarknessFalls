@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class PauseOptions : MonoBehaviour
 {
-    public GameObject mainMenu;
-    public GameObject optionsMenu;
-    public GameObject controlsMenu;
-    public GameObject alertBox;
-    public AudioSource source;
-    public AudioClip click;
-    public AudioMixer mixer;
-    public Slider masterVolumeSlider;
-    public Slider musicVolumeSlider;
-    public Slider sfxVolumeSlider;
-    
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject pauseOptionsMenu;
+    [SerializeField] private GameObject pauseControlsMenu;
+    [SerializeField] private GameObject alertBox;
+
+    [SerializeField] private Button controlsButton;
+    [SerializeField] private Button optionsBackButton;
+    [SerializeField] private Button saveButton;
+    [SerializeField] private Slider masterVolume;
+    [SerializeField] private Slider musicVolume;
+    [SerializeField] private Slider sfxVolume;
+    [SerializeField] private AudioMixer mixer;
+
     // The function for the Master Slider
     public void ChangeMasterVolume(float masterVolume)
     {
@@ -44,15 +45,15 @@ public class MainMenu : MonoBehaviour
         float mixerMasterVolume = PlayerPrefs.GetFloat("MasterVolume", 0f);
         mixer.SetFloat("MasterVolume", mixerMasterVolume);
         float masterSliderValue = PlayerPrefs.GetFloat("MasterVolumeSlider", 1f);
-        masterVolumeSlider.value = masterSliderValue;
+        masterVolume.value = masterSliderValue;
         float mixerMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0f);
         mixer.SetFloat("MusicVolume", mixerMusicVolume);
         float musicSliderValue = PlayerPrefs.GetFloat("MusicVolumeSlider", 1f);
-        musicVolumeSlider.value = musicSliderValue;
+        musicVolume.value = musicSliderValue;
         float mixerSFXVolume = PlayerPrefs.GetFloat("SFXVolume", 0f);
         mixer.SetFloat("SFXVolume", mixerSFXVolume);
         float sfxSliderValue = PlayerPrefs.GetFloat("SFXVolumeSlider", 1f);
-        sfxVolumeSlider.value = sfxSliderValue;
+        sfxVolume.value = sfxSliderValue;
     }
 
     // The function that save the current settings
@@ -65,15 +66,15 @@ public class MainMenu : MonoBehaviour
         mixer.GetFloat("MusicVolume", out mixerMusicVolume);
         mixer.GetFloat("SFXVolume", out mixerSFXVolume);
         PlayerPrefs.SetFloat("MasterVolume", mixerMasterVolume);
-        PlayerPrefs.SetFloat("MasterVolumeSlider", masterVolumeSlider.value);
+        PlayerPrefs.SetFloat("MasterVolumeSlider", masterVolume.value);
         PlayerPrefs.SetFloat("MusicVolume", mixerMusicVolume);
-        PlayerPrefs.SetFloat("MusicVolumeSlider", musicVolumeSlider.value);
+        PlayerPrefs.SetFloat("MusicVolumeSlider", musicVolume.value);
         PlayerPrefs.SetFloat("SFXVolume", mixerSFXVolume);
-        PlayerPrefs.SetFloat("SFXVolumeSlider", sfxVolumeSlider.value);
+        PlayerPrefs.SetFloat("SFXVolumeSlider", sfxVolume.value);
     }
 
-    // The function that activates right as soon as you press play
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         // The if statement that checks if there is a previous option settings
         if (!PlayerPrefs.HasKey("MusicVolume") && !PlayerPrefs.HasKey("SFXVolume") && !PlayerPrefs.HasKey("MasterVolume"))
@@ -90,63 +91,24 @@ public class MainMenu : MonoBehaviour
         {
             LoadOptions();
         }
+
+        controlsButton.onClick.AddListener(DisplayControlsMenu);
+        optionsBackButton.onClick.AddListener(CheckForChanges);
+        saveButton.onClick.AddListener(SaveOptions);
     }
 
-    // The function for making a button produce sound
-    public void OnButtonPressed()
+    // Update is called once per frame
+    void Update()
     {
-        source.PlayOneShot(click);
+        
     }
 
-    // The function for quitting the game
-    public void QuitGame()
-    {
-        Application.Quit();
-        Debug.Log("Quitting the game");
-    }
-
-    // The function for going to the options menu
-    public void DisplayOptionsMenu()
-    {
-        optionsMenu.SetActive(true);
-        mainMenu.SetActive(false);
-        controlsMenu.SetActive(false);
-        alertBox.SetActive(false);
-    }
-
-    // The function for going back to main menu from options
-    public void CloseOptionsMenu()
-    {
-        mainMenu.SetActive(true);
-        optionsMenu.SetActive(false);
-        controlsMenu.SetActive(false);
-        alertBox.SetActive(false);
-    }
-
-    // The function to go to the conrtols menu
     public void DisplayControlsMenu()
     {
-        controlsMenu.SetActive(true);
-        mainMenu.SetActive(false);
-        optionsMenu.SetActive(false);
+        pauseControlsMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+        pauseOptionsMenu.SetActive(false);
         alertBox.SetActive(false);
-    }
-
-    // The function for going back to options menu from controls menu
-    public void CloseControlsMenu()
-    {
-        optionsMenu.SetActive(true);
-        controlsMenu.SetActive(false);
-        mainMenu.SetActive(false);
-        alertBox.SetActive(false);
-    }
-
-    // The function that starts a new game
-    public void StartNewGame()
-    {
-        GameManager.Instance.ChangeGameState(GameManager.GameState.PLAYING);
-        SceneManager.LoadScene("Level");
-        //SceneManager.LoadScene(1);
     }
 
     public void CheckForChanges()
@@ -172,20 +134,35 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void CloseOptionsMenu()
+    {
+        pauseControlsMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+        pauseOptionsMenu.SetActive(false);
+        alertBox.SetActive(false);
+    }
+
     public void ShowAlertBox()
     {
-        optionsMenu.SetActive(false);
-        mainMenu.SetActive(false);
-        controlsMenu.SetActive(false);
+        pauseOptionsMenu.SetActive(false);
+        pauseControlsMenu.SetActive(false);
+        pauseMenu.SetActive(false);
         alertBox.SetActive(true);
     }
 
     public void CloseAlertBox()
     {
+        pauseMenu.SetActive(true);
+        pauseOptionsMenu.SetActive(false);
+        pauseControlsMenu.SetActive(false);
         alertBox.SetActive(false);
-        optionsMenu.SetActive(false);
-        controlsMenu.SetActive(false);
-        mainMenu.SetActive(true);
+    }
 
+    public void CloseControlsMenu()
+    {
+        pauseControlsMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+        alertBox.SetActive(false);
+        pauseOptionsMenu.SetActive(true);
     }
 }
