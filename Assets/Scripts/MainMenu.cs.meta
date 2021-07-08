@@ -3,7 +3,17 @@ guid: 2aab98f597bb6df4b9a4299b0a1af554
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mainMenu: {instanceID: 0}
+  - optionsMenu: {instanceID: 0}
+  - controlsMenu: {instanceID: 0}
+  - alertBox: {instanceID: 0}
+  - source: {instanceID: 0}
+  - click: {instanceID: 0}
+  - mixer: {fileID: 24100000, guid: f68f6f3ad77d06049ab53f5961b7d9c0, type: 2}
+  - masterVolumeSlider: {instanceID: 0}
+  - musicVolumeSlider: {instanceID: 0}
+  - sfxVolumeSlider: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
