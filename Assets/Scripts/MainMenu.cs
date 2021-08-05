@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
     public Slider masterVolumeSlider;
     public Slider musicVolumeSlider;
     public Slider sfxVolumeSlider;
+    public Animator animator;
     
     // The function for the Master Slider
     public void ChangeMasterVolume(float masterVolume)
@@ -75,6 +76,8 @@ public class MainMenu : MonoBehaviour
     // The function that activates right as soon as you press play
     private void Start()
     {
+        animator = GetComponent<Animator>();
+
         // The if statement that checks if there is a previous option settings
         if (!PlayerPrefs.HasKey("MusicVolume") && !PlayerPrefs.HasKey("SFXVolume") && !PlayerPrefs.HasKey("MasterVolume"))
         {
@@ -112,6 +115,7 @@ public class MainMenu : MonoBehaviour
         mainMenu.SetActive(false);
         controlsMenu.SetActive(false);
         alertBox.SetActive(false);
+        animator.SetTrigger("ButtonClicked");
     }
 
     // The function for going back to main menu from options
@@ -147,6 +151,7 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.ChangeGameState(GameManager.GameState.PLAYING);
         SceneManager.LoadScene("Level");
         //SceneManager.LoadScene(1);
+        animator.SetTrigger("ButtonClicked");
     }
 
     public void CheckForChanges()
