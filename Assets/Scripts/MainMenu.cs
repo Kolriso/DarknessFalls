@@ -76,7 +76,7 @@ public class MainMenu : MonoBehaviour
     // The function that activates right as soon as you press play
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        // animator = GetComponent<Animator>();
 
         // The if statement that checks if there is a previous option settings
         if (!PlayerPrefs.HasKey("MusicVolume") && !PlayerPrefs.HasKey("SFXVolume") && !PlayerPrefs.HasKey("MasterVolume"))

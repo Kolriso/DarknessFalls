@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1116191948, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1118613220, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
       propertyPath: animator
       value: 
@@ -196,6 +200,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1748235607, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913671464, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3479164002943007513, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
