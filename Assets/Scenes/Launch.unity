@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1504697183, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1778238587}
     - target: {fileID: 1650045998, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -205,6 +209,18 @@ PrefabInstance:
     - target: {fileID: 1913671464, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048221692, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048221692, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048221692, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3479164002943007513, guid: 3effbc40958c6404d88aadf0a6ac5d3b, type: 3}
       propertyPath: m_RootOrder

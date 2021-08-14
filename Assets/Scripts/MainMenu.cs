@@ -111,16 +111,23 @@ public class MainMenu : MonoBehaviour
     // The function for going to the options menu
     public void DisplayOptionsMenu()
     {
+        animator.SetTrigger("ButtonClicked");
+        StartCoroutine(timer());
+    }
+
+    public IEnumerator timer()
+    {
+        yield return new WaitForSeconds(2);
         optionsMenu.SetActive(true);
         mainMenu.SetActive(false);
         controlsMenu.SetActive(false);
         alertBox.SetActive(false);
-        animator.SetTrigger("ButtonClicked");
     }
 
     // The function for going back to main menu from options
     public void CloseOptionsMenu()
     {
+        animator.SetTrigger("ButtonClicked");
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         controlsMenu.SetActive(false);
@@ -145,13 +152,20 @@ public class MainMenu : MonoBehaviour
         alertBox.SetActive(false);
     }
 
+    public IEnumerator backTimer()
+    {
+        yield return new WaitForSeconds(2);
+
+        GameManager.Instance.ChangeGameState(GameManager.GameState.PLAYING);
+        SceneManager.LoadScene("Level");
+    }
+
     // The function that starts a new game
     public void StartNewGame()
     {
-        GameManager.Instance.ChangeGameState(GameManager.GameState.PLAYING);
-        SceneManager.LoadScene("Level");
-        //SceneManager.LoadScene(1);
         animator.SetTrigger("ButtonClicked");
+        StartCoroutine(backTimer());
+        //SceneManager.LoadScene(1);
     }
 
     public void CheckForChanges()

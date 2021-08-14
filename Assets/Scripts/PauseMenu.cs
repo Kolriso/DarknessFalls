@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button restartButton;
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button quitButton;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     public void HandleRestart()
     {
+        animator.SetTrigger("ButtonClicked");
         GameManager.Instance.RestartGame();
     }
 
